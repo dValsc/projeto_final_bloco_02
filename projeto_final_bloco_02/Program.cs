@@ -1,5 +1,11 @@
 using projeto_final_bloco_02.Data;
+using projeto_final_bloco_02.Model;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using projeto_final_bloco_02.Validator;
+using projeto_final_bloco_02.Service;
+using projeto_final_bloco_02.Service.Implements;
+
 namespace projeto_final_bloco_02
 {
     public class Program
@@ -19,6 +25,12 @@ namespace projeto_final_bloco_02
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString)
             );
+
+            // Validação das Entidades
+            builder.Services.AddTransient<IValidator<Produto>, ProdutoValidator>();
+
+            // Registrar as Classes e Interfaces Service
+            builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
