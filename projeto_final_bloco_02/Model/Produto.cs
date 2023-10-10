@@ -19,5 +19,7 @@ namespace projeto_final_bloco_02.Model
 
         [Column(TypeName = "decimal(10,2)")]
         public decimal Preco { get; set; }
+
+        public virtual Categoria? Categoria { get; set; }
     }
 }
